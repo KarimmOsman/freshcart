@@ -1,4 +1,4 @@
-# 🛒 FreshCart — Modern E-Commerce Platform (Angular 19 + SSR)
+# 🛒 FreshCart — Modern E-Commerce Platform
 
 **FreshCart** is a modern e-commerce platform built with **Angular 19**, **TypeScript 5.7**, and **Angular Universal (SSR)**.  
 It delivers a smooth, responsive, and SEO-friendly shopping experience powered by clean architecture, reusable UI components, and modern web tooling.
