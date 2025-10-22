@@ -1,0 +1,22 @@
+:host {
+  display: block;
+}
+
+.product-image-hover {
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+.product-image-hover:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.dark .btn-ghost {
+  background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .product-image-hover,
+  button {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,15 @@
+<section>
+  <h2 class="text-xl sm:text-2xl font-semibold text-green-600 dark:text-green-400">
+    Popular Categories
+  </h2>
+  <owl-carousel-o [options]="customOptions">
+    @for (cate of categories(); track cate._id) {
+    <ng-template carouselSlide [id]="cate._id">
+      <img [src]="cate.image" [alt]="cate.name" class="h-[300px]" />
+      <h4 class="text-green-600 dark:text-green-400 text-center">
+        {{ cate.name }}
+      </h4>
+    </ng-template>
+    }
+  </owl-carousel-o>
+</section>

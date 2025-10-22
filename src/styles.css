@@ -1,0 +1,226 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+/* ======================================================
+   🎨 Root Theme Variables
+   ====================================================== */
+:root {
+  /* Brand Colors */
+  --main-color: #16a34a; /* Tailwind green-600 */
+  --main-hover: #11bd11;
+  --accent-color: #10b981; /* green-500 */
+  --danger-color: #ef4444; /* red-500 */
+  --danger-hover: #dc2626; /* red-600 */
+  --bg-light: #f9fafb; /* gray-50 */
+  --text-main: #1f2937; /* gray-800 */
+
+  /* Scrollbar Colors (light mode) */
+  --scroll-w: 12px;
+  --scroll-track: #f3f4f6; /* light track */
+  --scroll-thumb-solid: #9ca3af; /* FF fallback (mid gray) */
+  --scroll-thumb-hover-solid: #6b7280;
+}
+
+.dark {
+  --main-color: #22c55e; /* green-500 */
+  --main-hover: #16a34a; /* green-600 */
+  --accent-color: #34d399; /* green-400 */
+  --danger-color: #ef4444; /* red-500 */
+  --danger-hover: #f87171; /* red-400 */
+  --bg-light: #1f2937; /* gray-800 */
+  --text-main: #f3f4f6; /* gray-100 */
+
+  /* Scrollbar Colors (dark mode) */
+  --scroll-track: #111827; /* bg for dark */
+  --scroll-thumb-solid: #374151; /* darker gray */
+  --scroll-thumb-hover-solid: #4b5563;
+}
+
+body {
+  font-family: "Edu NSW ACT Cursive", cursive;
+}
+/* ======================================================
+   ✨ Modern Global Scrollbar
+   ====================================================== */
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: var(--scroll-w);
+  height: var(--scroll-w);
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(
+    180deg,
+    rgba(22, 163, 74, 0.05),
+    rgba(34, 197, 94, 0.05)
+  );
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(34, 197, 94, 0.9),
+    rgba(16, 185, 129, 0.9)
+  );
+  border-radius: 9999px;
+  border: 3px solid transparent; /* space to create rounded look */
+  background-clip: padding-box;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 6px rgba(5, 150, 75, 0.2);
+  transition: all 240ms ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(22, 163, 74, 1),
+    rgba(16, 185, 129, 1)
+  );
+  border-width: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 3px 8px rgba(5, 150, 75, 0.3);
+}
+
+/* slightly narrower on very small screens for comfort */
+@media (max-width: 640px) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* ---------- Firefox ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--main-color) var(--scroll-track);
+}
+
+.dark * {
+  scrollbar-color: var(--main-hover) var(--scroll-track);
+}
+/* ======================================================
+   🧩 Shared Components (Cart + Wishlist)
+   ====================================================== */
+@layer components {
+  /* ---------- Containers ---------- */
+  .cart-container,
+  .wishlist-container {
+    @apply p-5 w-full md:w-3/4 mx-auto my-6
+      bg-gray-100 dark:bg-gray-800
+      border border-gray-300 dark:border-gray-700
+      shadow rounded-2xl
+      transition-colors duration-300;
+  }
+
+  /* ---------- Headers ---------- */
+  .cart-header,
+  .wishlist-header {
+    @apply font-semibold mb-4;
+  }
+
+  .cart-title,
+  .wishlist-title {
+    @apply text-2xl md:text-3xl mb-3
+      text-gray-800 dark:text-gray-100;
+  }
+
+  /* Ensure headings keep correct color and don't render as block artifacts in dark mode */
+  h1,
+  h2,
+  h3,
+  h4,
+  .auth-title {
+    color: var(--text-main);
+  }
+
+  /* ---------- Item Container ---------- */
+  .cart-item,
+  .wishlist-item {
+    @apply flex flex-col md:flex-row
+      items-center justify-between gap-4 py-4
+      border-b border-gray-300 dark:border-gray-600
+      last:border-b-0;
+  }
+
+  /* ---------- Image ---------- */
+  .cart-image,
+  .wishlist-image {
+    @apply w-full md:w-1/5;
+  }
+
+  .cart-image img,
+  .wishlist-image img {
+    @apply w-full h-[150px] object-contain rounded-md
+      bg-white dark:bg-gray-700 p-2;
+  }
+
+  /* ---------- Info ---------- */
+  .cart-info,
+  .wishlist-info {
+    @apply flex flex-col sm:flex-row justify-between items-center
+      w-full md:w-4/5 gap-4;
+  }
+
+  .cart-text,
+  .wishlist-text {
+    @apply text-center sm:text-left;
+  }
+
+  .cart-text h3,
+  .wishlist-text h3 {
+    @apply text-gray-800 dark:text-gray-100 font-medium;
+  }
+
+  .cart-text h4,
+  .wishlist-text h4 {
+    @apply text-green-600 dark:text-green-400 font-semibold;
+  }
+
+  /* ---------- Buttons ---------- */
+  .cart-remove-btn,
+  .wishlist-remove-btn {
+    @apply text-sm text-red-500 hover:text-red-700
+      dark:hover:text-red-400
+      transition flex items-center gap-1;
+  }
+
+  .cart-clear-btn {
+    @apply text-white bg-red-500 hover:bg-red-600
+      dark:hover:bg-red-700
+      transition-colors duration-300 text-sm px-4 py-2
+      rounded-lg shadow-md flex items-center gap-2;
+  }
+
+  .cart-action-btn {
+    @apply text-green-500 hover:text-green-600 text-2xl transition;
+  }
+
+  /* ---------- Main Button (Upgraded) ---------- */
+  .btn-main {
+    @apply inline-flex items-center justify-center
+      px-5 py-2.5 rounded-lg font-semibold text-white shadow-md
+      transition-colors duration-300 border border-gray-300;
+    background-color: var(--main-color);
+  }
+
+  .btn-main:hover {
+    background-color: var(--main-hover);
+  }
+
+  .btn-main:disabled {
+    cursor: not-allowed;
+    background-color: #ccc !important;
+    color: #fff !important;
+  }
+
+  /* ---------- Empty States ---------- */
+  .cart-empty,
+  .wishlist-empty {
+    @apply text-2xl md:text-3xl text-center
+      text-green-600 dark:text-green-400 py-10;
+  }
+}

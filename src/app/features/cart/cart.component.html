@@ -1,0 +1,133 @@
+@if (cartDetails.totalCartPrice) {
+<section class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div
+    class="max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6"
+  >
+    <!-- Cart Header -->
+    <div class="space-y-4 mb-8">
+      <div class="flex items-center gap-3">
+        <span class="bg-green-100 dark:bg-green-900 p-2 rounded-lg">
+          <i
+            class="fas fa-shopping-cart text-green-600 dark:text-green-400 text-xl"
+          ></i>
+        </span>
+        <h1
+          class="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white"
+        >
+          Shopping Cart
+        </h1>
+      </div>
+
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-gray-200 dark:border-gray-700 pb-4"
+      >
+        <div class="flex flex-col">
+          <span class="text-gray-600 dark:text-gray-400">Total Amount:</span>
+          <span class="text-2xl font-bold text-green-600 dark:text-green-400">
+            {{ cartDetails.totalCartPrice | currency : "GBP" }}
+          </span>
+        </div>
+
+        <button
+          (click)="clearCart()"
+          class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 bg-red-50 dark:bg-red-900/30 rounded-lg transition-colors"
+        >
+          <i class="fa fa-trash-can"></i>
+          Clear Cart
+        </button>
+      </div>
+    </div>
+
+    <!-- Cart Items -->
+    <div class="space-y-6">
+      @for (item of cartDetails.products; track item.product.id) {
+      <div
+        class="flex flex-col sm:flex-row gap-4 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl"
+      >
+        <!-- Product Image -->
+        <div
+          class="w-full sm:w-32 h-32 rounded-lg overflow-hidden flex-shrink-0"
+        >
+          <img
+            [src]="item.product.imageCover"
+            [alt]="item.product.title"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <!-- Product Info -->
+        <div class="flex-1 flex flex-col sm:flex-row justify-between gap-4">
+          <div class="space-y-2">
+            <h3 class="font-medium text-gray-900 dark:text-white">
+              {{ item.product.title }}
+            </h3>
+            <p class="text-lg font-semibold text-green-600 dark:text-green-400">
+              {{ item.price | currency : "GBP" }}
+            </p>
+            <button
+              (click)="removeProductFromCart(item.product.id)"
+              class="inline-flex items-center gap-2 text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300"
+            >
+              <i class="fas fa-trash-can"></i>
+              Remove
+            </button>
+          </div>
+
+          <!-- Quantity Controls -->
+          <div class="flex items-center gap-3 self-end sm:self-center">
+            <button
+              (click)="updateProductCount(item.product.id, item.count - 1)"
+              class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+            >
+              <i class="fas fa-minus text-sm"></i>
+            </button>
+
+            <span
+              class="w-12 text-center font-semibold text-gray-900 dark:text-white"
+            >
+              {{ item.count }}
+            </span>
+
+            <button
+              (click)="updateProductCount(item.product.id, item.count + 1)"
+              class="w-8 h-8 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-green-100 dark:hover:bg-green-900 hover:text-green-600 dark:hover:text-green-400 transition-colors"
+            >
+              <i class="fas fa-plus text-sm"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Checkout Button -->
+    <div class="mt-8 text-center sm:text-right">
+      <a
+        [routerLink]="['/checkout', cartDetails._id]"
+        class="inline-flex items-center gap-2 px-6 py-3 text-lg font-semibold text-white bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200"
+      >
+        Proceed to Checkout
+        <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+  </div>
+</section>
+} @else {
+<div class="min-h-[60vh] flex items-center justify-center">
+  <div class="text-center space-y-4">
+    <div class="text-6xl">🛒</div>
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+      Your Cart is Empty
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      Looks like you haven’t added anything to your cart yet.
+    </p>
+    <a
+      routerLink="/home"
+      class="inline-block mt-4 px-6 py-3 text-sm font-medium text-white bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 rounded-lg transition-colors"
+    >
+      Continue Shopping
+    </a>
+  </div>
+</div>
+}

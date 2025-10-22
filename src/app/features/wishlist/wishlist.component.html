@@ -1,0 +1,50 @@
+@if (wishlistDetails.count > 0) {
+<section class="wishlist-container">
+  <div class="wishlist-header">
+    <h1 class="wishlist-title">💖 Your Wishlist</h1>
+    <p class="text-gray-500 dark:text-gray-400 text-sm">
+      You have {{ wishlistDetails.count }} saved item(s)
+    </p>
+  </div>
+
+  @for (item of wishlistDetails.data; track item.id) {
+  <div class="wishlist-item">
+    <div class="wishlist-image">
+      <img [src]="item.imageCover" [alt]="item.title" />
+    </div>
+
+    <div class="wishlist-info">
+      <div class="wishlist-text">
+        <h3>{{ item.title }}</h3>
+        <h4>{{ item.price | currency : "GBP" }}</h4>
+        <button
+          (click)="removeProductFromWishlist(item.id)"
+          class="wishlist-remove-btn"
+        >
+          <i class="fas fa-trash-can"></i>
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+  }
+</section>
+} @else {
+<div class="min-h-[60vh] flex items-center justify-center">
+  <div class="text-center space-y-4">
+    <div class="text-6xl">💖</div>
+    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">
+      Your Wishlist is Empty
+    </h2>
+    <p class="text-gray-600 dark:text-gray-400">
+      Browse items and add your favorites to your wishlist.
+    </p>
+    <a
+      routerLink="/home"
+      class="inline-block mt-4 px-6 py-3 text-sm font-medium text-white bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 rounded-lg transition-colors"
+    >
+      Explore Products
+    </a>
+  </div>
+</div>
+}

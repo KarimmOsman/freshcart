@@ -1,0 +1,42 @@
+<section class="py-4 sm:py-6 lg:py-8 min-h-screen">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-4 lg:gap-6 grid-cols-1 md:grid-cols-[65%_35%]">
+      <div class="rounded-xl overflow-hidden shadow-lg">
+        <owl-carousel-o [options]="mainCustomOptions">
+          @for (img of [1,2,3,4,5,6]; track img) {
+          <ng-template carouselSlide>
+            <img
+              src="/images/img{{ img }}.avif"
+              class="w-full h-[200px] sm:h-[300px] lg:h-[400px] transition-transform duration-300 hover:scale-105"
+              loading="lazy"
+              alt="Slider image {{ img }}"
+            />
+          </ng-template>
+          }
+        </owl-carousel-o>
+      </div>
+      <div class="flex flex-col justify-around gap-4 lg:gap-6">
+        <div
+          class="rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+        >
+          <img
+            src="images/grocery-banner.png"
+            class="w-full h-[150px] sm:h-[200px]"
+            loading="lazy"
+            alt="Grocery banner 1"
+          />
+        </div>
+        <div
+          class="rounded-xl overflow-hidden shadow-lg transition-transform duration-300 hover:scale-[1.02]"
+        >
+          <img
+            src="images/grocery-banner-2.jpeg"
+            class="w-full h-[150px] sm:h-[200px]"
+            loading="lazy"
+            alt="Grocery banner 2"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

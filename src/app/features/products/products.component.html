@@ -1,0 +1,49 @@
+<section>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col gap-6">
+      <div class="text-center">
+        <h2
+          class="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400 mt-4"
+        >
+          Popular Products
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300">
+          Discover our most loved items
+        </p>
+      </div>
+
+      <div class="relative max-w-2xl mx-auto w-full">
+        <input
+          [(ngModel)]="searchValue"
+          type="search"
+          placeholder="Search products by name..."
+          class="w-full px-4 py-3 rounded-lg border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-green-500 focus:border-transparent transition-colors duration-200"
+        />
+        <div
+          class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500"
+        >
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        @for (prod of products()| paginate: { id: 'products', itemsPerPage:
+        pageSize, currentPage: p, totalItems: total } | search : searchValue ;
+        track prod.id) {
+        <app-card [product]="prod" />
+        }
+      </div>
+
+      <div class="flex justify-center mt-8">
+        <pagination-controls
+          id="products"
+          (pageChange)="getProductsData($event)"
+          class="my-pagination"
+        >
+        </pagination-controls>
+      </div>
+    </div>
+  </div>
+</section>

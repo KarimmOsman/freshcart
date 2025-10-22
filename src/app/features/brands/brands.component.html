@@ -1,0 +1,28 @@
+<section>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2
+      class="text-2xl sm:text-3xl font-bold text-green-600 dark:text-green-400 text-center my-4"
+    >
+      Popular Brands
+    </h2>
+
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
+      @for (brand of brands() ; track brand._id) {
+      <div class="card">
+        <div class="card-img">
+          <img
+            [src]="brand.image"
+            class="w-full h-[150px] border rounded-full object-cover border-green-400/50 hover:border-green-500 hover:scale-110 duration-500"
+            [alt]="brand.slug"
+          />
+        </div>
+        <div class="card-body px-2 py-4">
+          <h3 class="text-green-500 text-xl text-center font-semibold">
+            {{ brand.name }}
+          </h3>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>

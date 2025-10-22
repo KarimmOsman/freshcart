@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@layer components {
+  .nav-link {
+    @apply block px-3 py-2 rounded-md text-gray-700 dark:text-gray-200
+           hover:bg-green-600 hover:text-white dark:hover:bg-green-500 dark:hover:text-white
+           transition-colors duration-200;
+  }
+
+  .nav-icon {
+    @apply inline-flex items-center justify-center px-2 py-1 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-150;
+  }
+
+  .active-nav,
+  .router-link-active {
+    @apply bg-green-600 text-white dark:bg-green-600;
+  }
+
+  .badge-counter {
+    @apply absolute -top-2 -right-0 inline-flex items-center justify-center
+           px-1.5 py-0.5 text-[11px] font-bold rounded-full
+           bg-gray-200 dark:bg-gray-800 text-green-500 shadow-md;
+  }
+
+  .nav-dropdown {
+    @apply transition-transform duration-200 ease-in-out;
+  }
+
+  .welcome-text {
+    @apply text-center text-lg font-semibold break-words px-5
+           bg-gradient-to-r from-green-500 to-green-700 
+           bg-clip-text text-transparent select-none tracking-wide;
+  }
+
+  .logout-btn {
+    @apply px-3 py-2 rounded-md text-gray-700 dark:text-gray-200 font-medium 
+           hover:bg-red-100 dark:hover:bg-red-700 
+           hover:text-red-700 dark:hover:text-red-300 
+           transition-colors duration-200 ease-in-out;
+  }
+  
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+}
